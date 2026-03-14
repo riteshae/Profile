@@ -1,13 +1,571 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport" content="with=device-width, initial-scale=1">
-            <title>My First website</title>
-    </head>
-    <body>
-        <h1>My Name is <b>Ritesh Kumar</b></h1>
-        <p>This site is design to give information about myself. This will give complite guide.</p>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ritesh Kumar — Senior Technical Writer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f5f2ec;
+      --accent: #c0392b;
+      --muted: #7a7268;
+      --rule: #d4cfc5;
+      --highlight: #fff8e7;
+      --mono: 'DM Mono', monospace;
+      --serif: 'DM Serif Display', serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; max-width: 100%; }
+    }
+
+    body {
+      background: #e8e4dc;
+      font-family: var(--sans);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      -webkit-print-color-adjust: exact;
+    }
+
+    .page {
+      background: var(--paper);
+      max-width: 860px;
+      width: 100%;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 1100px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── LEFT SIDEBAR ─── */
+    .sidebar {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 48px 28px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .name-block {}
+
+    .name-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .name {
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.15;
+      color: #fff;
+    }
+
+    .title {
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 12.5px;
+      color: #a09888;
+      margin-top: 8px;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+
+    .divider {
+      width: 32px;
+      height: 2px;
+      background: var(--accent);
+      margin: 4px 0 0;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .contact-list li {
+      font-size: 12px;
+      color: #c8c0b4;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .contact-list li .icon {
+      color: var(--accent);
+      font-size: 12px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Skills */
+    .skill-group { margin-bottom: 20px; }
+    .skill-group:last-child { margin-bottom: 0; }
+
+    .skill-group-title {
+      font-size: 10px;
+      font-family: var(--mono);
+      color: #7a7268;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #d4cfc5;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 2px;
+      margin: 0 4px 6px 0;
+      font-family: var(--mono);
+    }
+
+    /* Tools */
+    .tools-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tools-list li {
+      font-size: 11.5px;
+      color: #c8c0b4;
+      font-family: var(--mono);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .tools-list li::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* Education sidebar */
+    .edu-item { margin-bottom: 16px; }
+    .edu-item:last-child { margin-bottom: 0; }
+    .edu-degree { font-size: 12px; font-weight: 500; color: #e8e4dc; }
+    .edu-school { font-size: 11px; color: #a09888; margin-top: 2px; }
+    .edu-year {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    /* ─── MAIN CONTENT ─── */
+    .main {
+      padding: 48px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+
+    .section {}
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: #3a3530;
+      font-weight: 300;
+    }
+
+    .summary-text strong {
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    /* Experience */
+    .exp-item {
+      margin-bottom: 26px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .exp-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .exp-role {
+      font-family: var(--serif);
+      font-size: 15.5px;
+      color: var(--ink);
+    }
+
+    .exp-tenure {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+      padding-top: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    .exp-company {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .exp-bullets li {
+      font-size: 12.5px;
+      line-height: 1.65;
+      color: #3a3530;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 11px;
+    }
+
+    /* Certifications */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .cert-card {
+      border: 1px solid var(--rule);
+      padding: 12px 14px;
+      background: var(--highlight);
+    }
+
+    .cert-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    /* Languages */
+    .lang-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 9px;
+    }
+
+    .lang-name {
+      font-size: 12px;
+      color: var(--ink);
+      width: 80px;
+      flex-shrink: 0;
+    }
+
+    .lang-bar {
+      flex: 1;
+      height: 3px;
+      background: var(--rule);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .lang-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 2px;
+      animation: expand 1s ease both;
+      animation-delay: 0.4s;
+      transform-origin: left;
+    }
+
+    @keyframes expand {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .lang-level {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      width: 60px;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+
+    <div class="name-block">
+      <div class="name-tag">// technical writer</div>
+      <div class="name">Ritesh<br/>Kumar</div>
+      <div class="title">Senior Technical Writer<br/>10+ Years · API Docs · DevDocs</div>
+      <div class="divider"></div>
+    </div>
+
+    <!-- Contact -->
+    <div>
+      <div class="section-label">Contact</div>
+      <ul class="contact-list">
+        <li><span class="icon">✉</span> ritesh.write@gmail.com</li>
+        <li><span class="icon">☎</span> +91-XXXXXXXXXX</li>
+        <li><span class="icon">⌖</span> Bengaluru, Karnataka</li>
+        <li><span class="icon">◈</span> linkedin.com/in/riteshae</li>
+        <li><span class="icon">◉</span> github.com/riteshae</li>
+      </ul>
+    </div>
+
+    <!-- Core Skills -->
+    <div>
+      <div class="section-label">Core Skills</div>
+      <div class="skill-group">
+        <div class="skill-group-title">Documentation</div>
+        <span class="skill-tag">API Docs</span>
+        <span class="skill-tag">SDK Guides</span>
+        <span class="skill-tag">User Manuals</span>
+        <span class="skill-tag">Release Notes</span>
+        <span class="skill-tag">Runbooks</span>
+        <span class="skill-tag">DITA</span>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Standards & Methods</div>
+        <span class="skill-tag">Docs-as-Code</span>
+        <span class="skill-tag">OpenAPI</span>
+        <span class="skill-tag">Agile/Scrum</span>
+        <span class="skill-tag">DDLC</span>
+        <span class="skill-tag">Style Guides</span>
+      </div>
+    </div>
+
+    <!-- Tools -->
+    <div>
+      <div class="section-label">Tools</div>
+      <ul class="tools-list">
+        <li>Paligo · MS Word</li>
+        <li>Confluence · Jira</li>
+        <li>Git · GitHub / GitLab</li>
+        <li>Swagger / Postman</li>
+        <li>VS Code · Markdown</li>
+        <li>Aha!</li>
+        <li>Figma (annotation)</li>
+      </ul>
+    </div>
+
+    <!-- Education -->
+    <div>
+      <div class="section-label">Education</div>
+        <div class="edu-degree">B.E — Aeronautical Engineering</div>
+        <div class="edu-school">VIT University, Vellore</div>
+        <div class="edu-year">2011</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+
+    <!-- Summary -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Profile</div>
+        <div class="section-line"></div>
+      </div>
+      <p class="summary-text">
+        Senior Technical Writer with <strong>7+ years</strong> delivering developer-focused documentation for
+        SaaS, cloud, and enterprise platforms. Proven ability to translate complex engineering concepts into
+        <strong>clear, accurate, and user-centric content</strong> — from REST API references and SDK guides
+        to end-to-end user manuals. Experienced in <strong>docs-as-code workflows</strong>, collaborating
+        closely with engineering, product, and UX teams to ship docs that scale.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Experience</div>
+        <div class="section-line"></div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Senior Technical Writer</div>
+          <div class="exp-tenure">Aug 2023 — Present</div>
+        </div>
+        <div class="exp-company">Laerdal Bangalore LLP · Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Authored and maintained 200+ API reference pages using OpenAPI 3.0 and Swagger, reducing developer support tickets by 35%.</li>
+          <li>Established the team's docs-as-code pipeline (Git + MkDocs + CI/CD), cutting release lag from 5 days to same-day publication.</li>
+          <li>Led a 3-person writing squad; introduced structured peer-review templates that improved first-pass accuracy by 40%.</li>
+          <li>Partnered with UX to produce in-product microcopy and onboarding tooltips for a cloud-native SaaS dashboard.</li>
+          <li>Maintained the internal style guide aligned to Microsoft Writing Style Guide and Google Developer Documentation Style Guide.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Staff Technical Writer II</div>
+          <div class="exp-tenure">Apr 2021 — Aug 2023</div>
+        </div>
+        <div class="exp-company">Impelsys India Pvt Ltd · Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Produced SDK integration guides and conceptual overviews for Java, Python, and Node.js client libraries used by 5,000+ developers.</li>
+          <li>Documented microservices architecture using C4 model diagrams and narrative descriptions for internal and external audiences.</li>
+          <li>Collaborated in two-week Agile sprints; attended daily standups and sprint retrospectives to keep docs aligned with releases.</li>
+          <li>Delivered DITA-based modular content for a tier-1 banking client, enabling single-source publishing across PDF, HTML, and mobile.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role">Technical Writer</div>
+          <div class="exp-tenure">Dec 2017 — Dec 2020</div>
+        </div>
+        <div class="exp-company">Capgemini India Private Limited · Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Wrote installation guides, admin manuals, and release notes for on-premise enterprise software products.</li>
+          <li>Developed structured templates in FrameMaker that standardised formatting across a 300-page product suite.</li>
+          <li>Gathered content through SME interviews, engineering specs, and usability test observations.</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- Certifications -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Certifications</div>
+        <div class="section-line"></div>
+      </div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-name">Certified Professional Technical Communicator (CPTC)</div>
+          <div class="cert-issuer">STC · 2021</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Google Technical Writing Fundamentals</div>
+          <div class="cert-issuer">Google Developers · 2022</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Write the Docs — API Documentation</div>
+          <div class="cert-issuer">Write the Docs · 2020</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">DITA Fundamentals</div>
+          <div class="cert-issuer">Oxygen XML · 2019</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Languages -->
+    <section class="section">
+      <div class="section-header">
+        <div class="section-title">Languages</div>
+        <div class="section-line"></div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-name">English</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:97%"></div></div>
+        <div class="lang-level">Native/C2</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-name">Hindi</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+        <div class="lang-level">Native</div>
+      </div>
+      <div class="lang-row">
+        <div class="lang-name">Kannada</div>
+        <div class="lang-bar"><div class="lang-fill" style="width:55%"></div></div>
+        <div class="lang-level">Working</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
 </html>
